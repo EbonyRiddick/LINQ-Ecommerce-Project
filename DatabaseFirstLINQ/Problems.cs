@@ -65,13 +65,11 @@ namespace DatabaseFirstLINQ
             // Then print the name and price of each product from the above query to the console.
             
             
-            var products = _context.Products;
+            var products = _context.Products.Where(p => p.Price > 150m);
 
             foreach (var product in products)
-                if (product.Price>150)
             {
                     Console.WriteLine(product.Name + " " + product.Price);
-             
             }
         }
 
@@ -93,11 +91,13 @@ namespace DatabaseFirstLINQ
             // Write a LINQ query that gets all of the users who registered BEFORE 2016
             // Then print each user's email and registration date to the console.
 
-            var registeredBefore = _context.Users.Where(y => y.RegistrationDate < 2016).ToList();
+            DateTime endDate = new DateTime(2016, 01, 01);
+
+            var registeredBefore = _context.Users.Where(y => y.RegistrationDate < endDate).ToList();
 
             foreach (User user in registeredBefore)
             {
-                Console.WriteLine(registeredBefore.RegistrationDate);
+                Console.WriteLine(user.RegistrationDate);
             }
         }
 
