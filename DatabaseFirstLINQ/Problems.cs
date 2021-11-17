@@ -19,7 +19,7 @@ namespace DatabaseFirstLINQ
             ProblemOne();
             ProblemTwo();
             ProblemThree();
-            //ProblemFour();
+            ProblemFour();
             //ProblemFive();
             //ProblemSix();
             //ProblemSeven();
@@ -66,7 +66,6 @@ namespace DatabaseFirstLINQ
             
             
             var products = _context.Products;
-            //var oneFiftyOrMore = products.Where(p => p.price > 150);
 
             foreach (var product in products)
                 if (product.Price>150)
