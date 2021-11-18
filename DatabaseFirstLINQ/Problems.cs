@@ -29,9 +29,9 @@ namespace DatabaseFirstLINQ
             ProblemEleven();
             ProblemTwelve();
             ProblemThirteen();
-            ProblemFourteen();
-            //ProblemFifteen();
-            //ProblemSixteen();
+            //ProblemFourteen();
+            ProblemFifteen();
+            ProblemSixteen();
             //ProblemSeventeen();
             //ProblemEighteen();
             //ProblemNineteen();
@@ -223,10 +223,10 @@ namespace DatabaseFirstLINQ
             Product newProduct = new Product()
             {
 
-              Id = addProduct
+              Id = addProduct.ToString(),
             };
-            
-            _context.Products.Add(addProduct);
+
+            _context.ShoppingCarts.Add(addProduct);
 
 
         }
@@ -245,7 +245,10 @@ namespace DatabaseFirstLINQ
         private void ProblemSixteen()
         {
             // Update the price of the product you created to something different using LINQ.
-
+            var product = _context.Products.Where(p => p.Name == "Salt & Vinegar Kettle Potato Chips").SingleOrDefault();
+            product.Price = 4.99m;
+            _context.Products.Update(product);
+            _context.SaveChanges();
         }
 
         private void ProblemSeventeen()
