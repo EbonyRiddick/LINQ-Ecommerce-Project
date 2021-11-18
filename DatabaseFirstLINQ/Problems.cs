@@ -28,8 +28,8 @@ namespace DatabaseFirstLINQ
             ProblemTen();
             ProblemEleven();
             ProblemTwelve();
-            ProblemThirteen();
-            //ProblemFourteen();
+            //ProblemThirteen();
+            ProblemFourteen();
             ProblemFifteen();
             ProblemSixteen();
             //ProblemSeventeen();
@@ -220,15 +220,17 @@ namespace DatabaseFirstLINQ
             // Add the product you create to the user we created in the ShoppingCart junction table using LINQ.
             var userId = _context.Users.Where(u => u.Email == "david@gmail.com").Select(u => u.Id).SingleOrDefault();
             var addProduct = _context.Products.Where(p => p.Name == "Salt & Vinegar Kettle Potato Chips").Select(_context => _context.Id).SingleOrDefault();
-            Product newProduct = new Product()
-            {
 
-              Id = addProduct.ToString(),
+            ShoppingCart thisCart = new ShoppingCart()
+            {
+                ProductId = userId,
+                UserId = addProduct
+
+
             };
 
-            _context.ShoppingCarts.Add(addProduct);
-
-
+            _context.ShoppingCarts.Add(thisCart);
+            _context.SaveChanges();
         }
 
         // <><> U Actions (Update) <><>
@@ -272,7 +274,15 @@ namespace DatabaseFirstLINQ
         private void ProblemEighteen()
         {
             // Delete the role relationship from the user who has the email "oda@gmail.com" using LINQ.
-
+            var userRole = _context.UserRoles.Where(ur => ur.User.Email == "oda@gmail.com").SingleOrDefault();
+            _context.UserRoles.Remove(userRole);
+            UserRole deleteUserRole = new UserRole()
+            {
+                UserId = _context.Users.Where(u => u.Email == "oda@gmail.com").Select(u => u.Id).SingleOrDefault(),
+                
+            };
+            _context.UserRoles.Remove(deleteUserRole);
+            _context.SaveChanges();
         }
 
         private void ProblemNineteen()
